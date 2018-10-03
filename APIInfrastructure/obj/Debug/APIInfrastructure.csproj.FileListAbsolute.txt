@@ -1,0 +1,13 @@
+D:\Projects\APISampleProject\APIInfrastructure\bin\Debug\APIInfrastructure.dll
+D:\Projects\APISampleProject\APIInfrastructure\bin\Debug\APIInfrastructure.pdb
+D:\Projects\APISampleProject\APIInfrastructure\bin\Debug\APIModels.dll
+D:\Projects\APISampleProject\APIInfrastructure\bin\Debug\EntityFramework.dll
+D:\Projects\APISampleProject\APIInfrastructure\bin\Debug\SampleEntityFramework.dll
+D:\Projects\APISampleProject\APIInfrastructure\bin\Debug\APIModels.pdb
+D:\Projects\APISampleProject\APIInfrastructure\bin\Debug\SampleEntityFramework.pdb
+D:\Projects\APISampleProject\APIInfrastructure\bin\Debug\SampleEntityFramework.dll.config
+D:\Projects\APISampleProject\APIInfrastructure\bin\Debug\EntityFramework.xml
+D:\Projects\APISampleProject\APIInfrastructure\obj\Debug\APIInfrastructure.csprojResolveAssemblyReference.cache
+D:\Projects\APISampleProject\APIInfrastructure\obj\Debug\APIInfrastructure.csproj.CoreCompileInputs.cache
+D:\Projects\APISampleProject\APIInfrastructure\obj\Debug\APIInfrastructure.dll
+D:\Projects\APISampleProject\APIInfrastructure\obj\Debug\APIInfrastructure.pdb

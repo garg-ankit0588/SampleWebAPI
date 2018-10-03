@@ -1,0 +1,11 @@
+D:\Projects\APISampleProject\SampleEntityFramework\bin\Debug\SampleEntityFramework.dll.config
+D:\Projects\APISampleProject\SampleEntityFramework\bin\Debug\SampleEntityFramework.dll
+D:\Projects\APISampleProject\SampleEntityFramework\bin\Debug\SampleEntityFramework.pdb
+D:\Projects\APISampleProject\SampleEntityFramework\bin\Debug\EntityFramework.dll
+D:\Projects\APISampleProject\SampleEntityFramework\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\APISampleProject\SampleEntityFramework\bin\Debug\EntityFramework.xml
+D:\Projects\APISampleProject\SampleEntityFramework\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\APISampleProject\SampleEntityFramework\obj\Debug\SampleEntityFramework.csprojResolveAssemblyReference.cache
+D:\Projects\APISampleProject\SampleEntityFramework\obj\Debug\SampleEntityFramework.csproj.CoreCompileInputs.cache
+D:\Projects\APISampleProject\SampleEntityFramework\obj\Debug\SampleEntityFramework.dll
+D:\Projects\APISampleProject\SampleEntityFramework\obj\Debug\SampleEntityFramework.pdb

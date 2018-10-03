@@ -1,0 +1,6 @@
+D:\Projects\APISampleProject\APIModels\bin\Debug\APIModels.dll
+D:\Projects\APISampleProject\APIModels\bin\Debug\APIModels.pdb
+D:\Projects\APISampleProject\APIModels\obj\Debug\APIModels.csprojResolveAssemblyReference.cache
+D:\Projects\APISampleProject\APIModels\obj\Debug\APIModels.csproj.CoreCompileInputs.cache
+D:\Projects\APISampleProject\APIModels\obj\Debug\APIModels.dll
+D:\Projects\APISampleProject\APIModels\obj\Debug\APIModels.pdb

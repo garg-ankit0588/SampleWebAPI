@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DepartmentMaster">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="int" Nullable="false" />
+    <Property Name="DepartmentName" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmployeeInfo">
+    <Key>
+      <PropertyRef Name="EmpId" />
+    </Key>
+    <Property Name="EmpId" Type="bigint" Nullable="false" />
+    <Property Name="EmpFullName" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmpFirstName" Type="nvarchar" MaxLength="25" />
+    <Property Name="EmpLastName" Type="nvarchar" MaxLength="25" />
+    <Property Name="EmpAddress" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EmplyoeeDepartment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpId" Type="bigint" Nullable="false" />
+    <Property Name="DeptId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_EmplyoeeDepartment_DeptId">
+    <End Role="DepartmentMaster" Type="Self.DepartmentMaster" Multiplicity="1" />
+    <End Role="EmplyoeeDepartment" Type="Self.EmplyoeeDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DepartmentMaster">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="EmplyoeeDepartment">
+        <PropertyRef Name="DeptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmplyoeeDepartment_EmpId">
+    <End Role="EmployeeInfo" Type="Self.EmployeeInfo" Multiplicity="1" />
+    <End Role="EmplyoeeDepartment" Type="Self.EmplyoeeDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeeInfo">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="EmplyoeeDepartment">
+        <PropertyRef Name="EmpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EmployeeModelStoreContainer">
+    <EntitySet Name="DepartmentMaster" EntityType="Self.DepartmentMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeInfo" EntityType="Self.EmployeeInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmplyoeeDepartment" EntityType="Self.EmplyoeeDepartment" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_EmplyoeeDepartment_DeptId" Association="Self.FK_EmplyoeeDepartment_DeptId">
+      <End Role="DepartmentMaster" EntitySet="DepartmentMaster" />
+      <End Role="EmplyoeeDepartment" EntitySet="EmplyoeeDepartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmplyoeeDepartment_EmpId" Association="Self.FK_EmplyoeeDepartment_EmpId">
+      <End Role="EmployeeInfo" EntitySet="EmployeeInfo" />
+      <End Role="EmplyoeeDepartment" EntitySet="EmplyoeeDepartment" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

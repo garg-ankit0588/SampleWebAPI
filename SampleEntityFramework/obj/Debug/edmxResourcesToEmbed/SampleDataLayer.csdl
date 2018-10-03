@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DepartmentMaster">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="EmplyoeeDepartments" Relationship="Self.FK_EmplyoeeDepartment_DeptId" FromRole="DepartmentMaster" ToRole="EmplyoeeDepartment" />
+  </EntityType>
+  <EntityType Name="EmployeeInfo">
+    <Key>
+      <PropertyRef Name="EmpId" />
+    </Key>
+    <Property Name="EmpId" Type="Int64" Nullable="false" />
+    <Property Name="EmpFullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmpFirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="EmpLastName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="EmpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="EmplyoeeDepartments" Relationship="Self.FK_EmplyoeeDepartment_EmpId" FromRole="EmployeeInfo" ToRole="EmplyoeeDepartment" />
+  </EntityType>
+  <EntityType Name="EmplyoeeDepartment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpId" Type="Int64" Nullable="false" />
+    <Property Name="DeptId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DepartmentMaster" Relationship="Self.FK_EmplyoeeDepartment_DeptId" FromRole="EmplyoeeDepartment" ToRole="DepartmentMaster" />
+    <NavigationProperty Name="EmployeeInfo" Relationship="Self.FK_EmplyoeeDepartment_EmpId" FromRole="EmplyoeeDepartment" ToRole="EmployeeInfo" />
+  </EntityType>
+  <Association Name="FK_EmplyoeeDepartment_DeptId">
+    <End Role="DepartmentMaster" Type="Self.DepartmentMaster" Multiplicity="1" />
+    <End Role="EmplyoeeDepartment" Type="Self.EmplyoeeDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DepartmentMaster">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="EmplyoeeDepartment">
+        <PropertyRef Name="DeptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmplyoeeDepartment_EmpId">
+    <End Role="EmployeeInfo" Type="Self.EmployeeInfo" Multiplicity="1" />
+    <End Role="EmplyoeeDepartment" Type="Self.EmplyoeeDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeeInfo">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="EmplyoeeDepartment">
+        <PropertyRef Name="EmpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EmployeeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DepartmentMasters" EntityType="Self.DepartmentMaster" />
+    <EntitySet Name="EmployeeInfoes" EntityType="Self.EmployeeInfo" />
+    <EntitySet Name="EmplyoeeDepartments" EntityType="Self.EmplyoeeDepartment" />
+    <AssociationSet Name="FK_EmplyoeeDepartment_DeptId" Association="Self.FK_EmplyoeeDepartment_DeptId">
+      <End Role="DepartmentMaster" EntitySet="DepartmentMasters" />
+      <End Role="EmplyoeeDepartment" EntitySet="EmplyoeeDepartments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmplyoeeDepartment_EmpId" Association="Self.FK_EmplyoeeDepartment_EmpId">
+      <End Role="EmployeeInfo" EntitySet="EmployeeInfoes" />
+      <End Role="EmplyoeeDepartment" EntitySet="EmplyoeeDepartments" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

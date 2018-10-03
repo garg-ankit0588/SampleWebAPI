@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EmployeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DepartmentMaster">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeInfo">
+          <Key>
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="EmpId" Type="bigint" Nullable="false" />
+          <Property Name="EmpFullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmpFirstName" Type="nvarchar" MaxLength="25" />
+          <Property Name="EmpLastName" Type="nvarchar" MaxLength="25" />
+          <Property Name="EmpAddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EmplyoeeDepartment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpId" Type="bigint" Nullable="false" />
+          <Property Name="DeptId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_EmplyoeeDepartment_DeptId">
+          <End Role="DepartmentMaster" Type="Self.DepartmentMaster" Multiplicity="1" />
+          <End Role="EmplyoeeDepartment" Type="Self.EmplyoeeDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmentMaster">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="EmplyoeeDepartment">
+              <PropertyRef Name="DeptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmplyoeeDepartment_EmpId">
+          <End Role="EmployeeInfo" Type="Self.EmployeeInfo" Multiplicity="1" />
+          <End Role="EmplyoeeDepartment" Type="Self.EmplyoeeDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeInfo">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="EmplyoeeDepartment">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmployeeModelStoreContainer">
+          <EntitySet Name="DepartmentMaster" EntityType="Self.DepartmentMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeInfo" EntityType="Self.EmployeeInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmplyoeeDepartment" EntityType="Self.EmplyoeeDepartment" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EmplyoeeDepartment_DeptId" Association="Self.FK_EmplyoeeDepartment_DeptId">
+            <End Role="DepartmentMaster" EntitySet="DepartmentMaster" />
+            <End Role="EmplyoeeDepartment" EntitySet="EmplyoeeDepartment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmplyoeeDepartment_EmpId" Association="Self.FK_EmplyoeeDepartment_EmpId">
+            <End Role="EmployeeInfo" EntitySet="EmployeeInfo" />
+            <End Role="EmplyoeeDepartment" EntitySet="EmplyoeeDepartment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmployeeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DepartmentMaster">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EmplyoeeDepartments" Relationship="Self.FK_EmplyoeeDepartment_DeptId" FromRole="DepartmentMaster" ToRole="EmplyoeeDepartment" />
+        </EntityType>
+        <EntityType Name="EmployeeInfo">
+          <Key>
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="EmpId" Type="Int64" Nullable="false" />
+          <Property Name="EmpFullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmpFirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="EmpLastName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="EmpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EmplyoeeDepartments" Relationship="Self.FK_EmplyoeeDepartment_EmpId" FromRole="EmployeeInfo" ToRole="EmplyoeeDepartment" />
+        </EntityType>
+        <EntityType Name="EmplyoeeDepartment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpId" Type="Int64" Nullable="false" />
+          <Property Name="DeptId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DepartmentMaster" Relationship="Self.FK_EmplyoeeDepartment_DeptId" FromRole="EmplyoeeDepartment" ToRole="DepartmentMaster" />
+          <NavigationProperty Name="EmployeeInfo" Relationship="Self.FK_EmplyoeeDepartment_EmpId" FromRole="EmplyoeeDepartment" ToRole="EmployeeInfo" />
+        </EntityType>
+        <Association Name="FK_EmplyoeeDepartment_DeptId">
+          <End Role="DepartmentMaster" Type="Self.DepartmentMaster" Multiplicity="1" />
+          <End Role="EmplyoeeDepartment" Type="Self.EmplyoeeDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmentMaster">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="EmplyoeeDepartment">
+              <PropertyRef Name="DeptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmplyoeeDepartment_EmpId">
+          <End Role="EmployeeInfo" Type="Self.EmployeeInfo" Multiplicity="1" />
+          <End Role="EmplyoeeDepartment" Type="Self.EmplyoeeDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeInfo">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="EmplyoeeDepartment">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmployeeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DepartmentMasters" EntityType="Self.DepartmentMaster" />
+          <EntitySet Name="EmployeeInfoes" EntityType="Self.EmployeeInfo" />
+          <EntitySet Name="EmplyoeeDepartments" EntityType="Self.EmplyoeeDepartment" />
+          <AssociationSet Name="FK_EmplyoeeDepartment_DeptId" Association="Self.FK_EmplyoeeDepartment_DeptId">
+            <End Role="DepartmentMaster" EntitySet="DepartmentMasters" />
+            <End Role="EmplyoeeDepartment" EntitySet="EmplyoeeDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmplyoeeDepartment_EmpId" Association="Self.FK_EmplyoeeDepartment_EmpId">
+            <End Role="EmployeeInfo" EntitySet="EmployeeInfoes" />
+            <End Role="EmplyoeeDepartment" EntitySet="EmplyoeeDepartments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EmployeeModelStoreContainer" CdmEntityContainer="EmployeeEntities">
+          <EntitySetMapping Name="DepartmentMasters">
+            <EntityTypeMapping TypeName="EmployeeModel.DepartmentMaster">
+              <MappingFragment StoreEntitySet="DepartmentMaster">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeInfoes">
+            <EntityTypeMapping TypeName="EmployeeModel.EmployeeInfo">
+              <MappingFragment StoreEntitySet="EmployeeInfo">
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="EmpFullName" ColumnName="EmpFullName" />
+                <ScalarProperty Name="EmpFirstName" ColumnName="EmpFirstName" />
+                <ScalarProperty Name="EmpLastName" ColumnName="EmpLastName" />
+                <ScalarProperty Name="EmpAddress" ColumnName="EmpAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmplyoeeDepartments">
+            <EntityTypeMapping TypeName="EmployeeModel.EmplyoeeDepartment">
+              <MappingFragment StoreEntitySet="EmplyoeeDepartment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
